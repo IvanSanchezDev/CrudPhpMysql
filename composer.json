@@ -1,0 +1,18 @@
+{
+    "name": "admin1/crud-php-mysql",
+    "autoload": {
+        "psr-4": {
+            "Admin1\\CrudPhpMysql\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "IvanDeveloperCampus",
+            "email": "ivancampus2023@gmail.com"
+        }
+    ],
+    "require": {
+        "bramus/router": "^1.6",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}

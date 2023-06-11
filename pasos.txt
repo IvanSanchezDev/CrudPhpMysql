@@ -1,0 +1,48 @@
+CRUD MVC PHP
+
+PASOS
+
+1.
+instalar composer y bramus
+
+- init composer
+- composer require bramus/router
+
+
+2.
+Crear archivos index.php  y cargamos el autoload de vendor y el enrutamiento 
+ini_set("display_errors", FALSE);
+require 'vendor/autoload.php';
+require 'src/libs/routes.php';
+
+3. 
+configuramos .htaccess para RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . index.php [L]facilitar el enrutamiento 
+
+4. 
+en src creamos las carpetas y archivos
+controllers, models, view y lib 
+
+en libs
+
+Clase view=creamos la funcion que para cargar y mostrar una vista y los datos si es necesario
+
+Clase Controller=declaramos una propieda de tipo view y la inicializo en el contructor y creams el metodo render que va a llamar la funcion tambien llamada render pero la  clase view
+ademas creamos los metodos post y get que van a recibir los datos
+
+Clase Database
+- composer require vlucas/phpdotenv 
+ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../config/');
+$dotenv->load(); => eso va en routes
+
+declaramos las variables y las inicializamos  en el constructor con el valor que llamemos en el .env y creamos la funcion connect para conectarnos
+
+Clase Model
+En esta clase declaramos una variable Database, y la inicializamos en el constructor instanciando la clase Database(), despues creamos dos funciones para  simplificar nuestars consultas 
+
+
+LISTO ESO ES LA BASE TODOS LOS CONTROLADORES EXTIENDEN DE LA CLASE CONTROLLER PARA HACER USO DE USOS METODOS Y EL CONSTRUICTOR TAMBIEN SE HEREDA parent::__construct()
+
+TAMBIEN TODOS LAS CLASES LOS MODELOS DE LA BD EXTIENDEN DE LA CLASE MODEL, PARA HACER USO DE LOS CONEXION A LA BD Y EL CONSTRUICTOR TAMBIEN SE HEREDA parent::__construct()
