@@ -46,6 +46,16 @@ class StudentController extends Controller{
     
         $this->render('estudiante/index', ['errors' => $errors]);
     }
+
+    public function deleteeStudent($id){
+        if (Student::deleteStudent($id)) {
+            header('Location: /CrudPhpMysql/home');
+        } else {
+            $this->render('errors/index');
+        }
+        
+        
+    }
     
 
    

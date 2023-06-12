@@ -75,6 +75,21 @@ class Student extends Model{
         }
     }
 
+    public static function deleteStudent($id){
+
+        try {
+            $db=new Database();
+            $query=$db->connect()->prepare('DELETE FROM estudiante WHERE id=:id');
+            $query->execute([
+                'id'=>$id
+            ]);
+            return true;
+        } catch (PDOException $th) {
+            echo $th->getMessage();
+            return false;
+        }
+    }
+
 }
 
 ?>

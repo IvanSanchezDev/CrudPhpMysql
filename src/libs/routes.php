@@ -43,18 +43,17 @@ $router->post("/addStudent", function(){
     $controller=new StudentController();
     $controller->saveStudent();
 });
-/*
-$router->delete("/deletStudent", function(){
 
+$router->get('/deleteStudent/{id}', function($id){
+    $controller=new StudentController();
+    $controller->deleteeStudent($id);
 });
 
+/*
 $router->put("/editStudent", function(){
 
 });
-
-$router->get("/getStudents", function(){
-
-});*/
+*/
 
 $router->run();
 
