@@ -2,9 +2,11 @@
 
 namespace Admin1\CrudPhpMysql\Models;
 
+use Admin1\CrudPhpMysql\libs\Database;
 use Admin1\CrudPhpMysql\libs\Model;
 use PDO;
 use PDOException;
+use Exception;
 
 class Student extends Model{
 
@@ -21,19 +23,20 @@ class Student extends Model{
         $this->promedio=$promedio;
     }
 
+
     public function __get($name){
         if (property_exists($this, $name)) {
-            return $this->name;
+            return $this->{$name};
         }
-
-        //throw new Exception("Propiedad invalid" . $name);
+        throw new Exception("Propiedad invalid" . $name);
     }
+
 
     public function __set($name, $value){
         if (property_exists($this, $name)) {
             $this->$name=$value;
         }
-        //throw new Exception("Propiedad invalid" . $name);
+        throw new Exception("Propiedad invalid" . $name);
     }
 
     public function addStudent(){
@@ -52,6 +55,23 @@ class Student extends Model{
         } catch (PDOException $th) {
             echo $th->getMessage();
             return false;
+        }
+    }
+
+    public static  function getStudents(){
+        $students=[];
+        try {
+            $db=new Database();
+            $query=$db->connect()->query('SELECT * FROM estudiante');
+            while ($e=$query->fetch(PDO::FETCH_ASSOC)) {
+                $student=new Student($e['cedula'], $e['nombre_estudiante'], $e['ruta_foto'], $e['sexo'], $e['jornada'], $e['promedio']);
+                $student->id=$e['id'];
+                array_unshift($students, $student);
+            }
+
+            return $students;
+        } catch (\Throwable $th) {
+            echo  "error" . $th->getMessage();
         }
     }
 

@@ -1,5 +1,5 @@
- <!DOCTYPE html>
- <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
  <head>
    <meta charset="UTF-8" />
@@ -215,32 +215,38 @@
    </div>
 
 
-
-
-
-
-
-
-
-
-
+   <?php 
+      $students=$this->data['students'];
+      ?>
 
    <div class="students container">
      <table class="table table-success table-striped table-bordered">
        <thead>
          <tr>
+          <th>Id</th>
            <th>CEDULA</th>
            <th>NOMBRE</th>
            <th>SEXO</th>
            <th>JORNADA</th>
            <th>PROMEDIO</th>
-           <th>CAMPO DE ACCION</th>
            <th>EDITAR</th>
            <th>ELIMINAR</th>
-           <th>DETALLE</th>
          </tr>
        </thead>
-       <tbody id="estudiantes" class="listado-estudiantes"></tbody>
+       <tbody id="estudiantes" class="listado-estudiantes text-dark">
+        <?php foreach ($students as $s) { ?>
+          <tr>
+            <td><?php echo $s->id; ?></td>
+            <td><?php echo $s->cedula; ?></td>
+            <td><?php echo $s->nombreEstudiante; ?></td>
+            <td><?php echo $s->sexo; ?></td>
+            <td><?php echo $s->jornada; ?></td>
+            <td><?php echo $s->promedio; ?></td>
+            <td><button class="btn btn-warning">Edit</button></td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+       <?php } ?>
+       </tbody>
      </table>
    </div>
 
@@ -254,22 +260,7 @@
      </div>
    </footer>
 
-   <?php
-
-    $errors = $this->data['errors'];
-    // Recibir el arreglo de errores
-    //$errors = isset($errors) ? $errors : [];
-
-    // ...
-
-    // Puedes utilizar el arreglo de errores en tu vista
-    if (!empty($errors)) {
-      foreach ($errors as $message) {
-          echo '<div class="error-message">' . $message . '</div>';
-      }
-  }
-    ?>
-
+   
    <script src="index.js" type="module"></script>
 
    <!-- JavaScript Bundle with Popper -->
@@ -277,5 +268,4 @@
     <script src="./index.js" type="module" defer></script> -->
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
  </body>
-
  </html>

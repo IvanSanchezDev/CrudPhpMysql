@@ -35,7 +35,7 @@ $router->get("/", function(){
 
 $router->get('/home', function(){
     $controller=new StudentController();
-    $controller->render('estudiante/index');
+    $controller->index();
 });
 
 

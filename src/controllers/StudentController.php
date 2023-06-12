@@ -15,7 +15,8 @@ class StudentController extends Controller{
     }
 
     public function index(){
-        $this->render('estudiante/index');
+        $students=Student::getStudents();
+        $this->render('estudiante/index', ['students'=>$students]);
     }
 
     public function saveStudent(){
